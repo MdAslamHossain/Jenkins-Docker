@@ -3,6 +3,9 @@
 2. docker run --name my-jenkins -p 8080:8080 jenkins/jenkins:jdk11
 3. http://localhost:8080/configureTools/ and https://stackoverflow.com/questions/26906972/cannot-run-program-mvn-error-2-no-such-file-or-directory
 4. Carefully add brance main or master ?
+5. A POM must needed in parallal to git repository url like https://github.com/MdAslamHossain/Kubernates or outside POM and declare main class
+
+ 
 
 
 
