@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    registry = 'dockeraslam43/docker-jenkins'
+    registryCredential = 'Docker-Credential'
+    dockerImage = ''
+  }
     agent any
     tools {
      maven 'Maven 3.6.3'
@@ -13,15 +18,21 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing.....'
+        stage('Building docker image..........') {
+          steps{
+            script {
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
+          }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying.....'
+        stage('Deploying docker image.........') {
+          steps{
+            script {
+              docker.withRegistry( '', registryCredential ) {
+                dockerImage.push()
+              }
             }
-        }
+          }
+    }
     }
 }
