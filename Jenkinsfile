@@ -10,6 +10,7 @@ pipeline {
                 echo 'Building..........'
                 sh 'npm --version'
                 sh 'mvn --version'
+                sh 'mvn clean install'
             }
         }
         stage('Test') {
