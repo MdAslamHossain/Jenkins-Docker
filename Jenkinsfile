@@ -1,6 +1,6 @@
 pipeline {
     environment {
-    registry = 'dockeraslam43/docker-jenkins'
+    registry = 'dockeraslam43/app'
     registryCredential = 'Docker-Credential'
     dockerImage = ''
     }
@@ -23,7 +23,7 @@ pipeline {
         stage('Building docker image..........') {
           steps{
             script {
-              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+              dockerImage = docker.build('app')
             }
           }
         }
