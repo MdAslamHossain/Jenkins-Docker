@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    imagename = 'dockeraslam43/app'
+    registryCredential = 'Docker-Credential'
+    dockerImage = ''
+    }
     agent any
     tools {
      maven 'Maven 3.6.3'
@@ -11,6 +16,23 @@ pipeline {
                 sh 'npm --version'
                 sh 'mvn --version'
                 sh 'mvn clean install -DskipTests'
+            }
+        }
+        stage('Building docker image..........') {
+          steps{
+            script {
+              dockerImage = docker.build imagename
+            }
+          }
+        }
+        stage('Deploy Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push("$BUILD_NUMBER")
+                    dockerImage.push('latest')
+                    }
+                }
             }
         }
     }
