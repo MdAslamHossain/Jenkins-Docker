@@ -3,8 +3,10 @@ pipeline {
     registry = 'dockeraslam43/docker-jenkins'
     registryCredential = 'Docker-Credential'
     dockerImage = ''
-  }
-    agent any
+    }
+    agent {
+    dockerfile true
+    }
     tools {
      maven 'Maven 3.6.3'
      nodejs 'NodeJs 12.0.0'  
