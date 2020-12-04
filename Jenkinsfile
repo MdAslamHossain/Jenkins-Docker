@@ -7,14 +7,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building.....FrontEnd'
+                echo 'Building..........'
                 sh 'npm --version'
+                sh 'mvn --version'
             }
         }
-        stage('Build') {
+        stage('Test') {
             steps {
-                echo 'Building.....Backend'
-                sh 'mvn --version'
+                echo 'Testing.....'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying.....'
             }
         }
     }
