@@ -12,13 +12,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..........'
+                echo 'Building............'
                 sh 'npm --version'
                 sh 'mvn --version'
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Building docker image..........') {
+        stage('Building docker image............') {
           steps{
             script {
               dockerImage = docker.build imagename
