@@ -11,8 +11,6 @@
 	<groupId>com.jenkins</groupId>
 	<artifactId>Simple-Jenkins-App</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Simple-Jenkins-App</name>
-	<description>Spring Boot</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -38,6 +36,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>app</finalName>
 	</build>
 
 	<repositories>
