@@ -20,22 +20,11 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Building docker image............') {
-          steps{
-            script {
-              dockerImage = docker.build imagename
-            }
-          }
-        }
-        stage('Deploy Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push("$BUILD_NUMBER")
-                    dockerImage.push('latest')
-                    }
-                }
-            }
-        }
+        node {
+            checkout scm
+            def customImage = docker.build("imagename:${env.BUILD_ID}")
+            customImage.push()
+            customImage.push('latest')
+    }
     }
 }
