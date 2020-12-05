@@ -9,6 +9,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/{msg}")
 	public String helloMethod(@PathVariable String pathVariable) {
-		return pathVariable;
+		return "You have typed "+pathVariable;
 	}
 }
