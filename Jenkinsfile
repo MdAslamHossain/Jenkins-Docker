@@ -16,6 +16,7 @@ pipeline {
                 sh 'npm --version'
                 sh 'mvn --version'
                 sh 'mvn clean install -DskipTests'
+                sh 'docker build -t dockeraslam43/app -f Dockerfile .'
             }
         }
         stage('Building docker image') { 
