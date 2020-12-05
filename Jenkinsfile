@@ -18,22 +18,26 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Building docker image............') {
-          steps{
-            script {
-              dockerImage = docker.build imagename
-            }
-          }
-        }
-        stage('Deploy Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push("$BUILD_NUMBER")
-                    dockerImage.push('latest')
-                    }
+        stage('Building docker image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build imagename + ":$BUILD_NUMBER" 
                 }
-            }
+            } 
         }
+        stage('Deploy docker image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+        stage('Cleaning up docker image') { 
+            steps { 
+                sh "docker rmi $imagename:$BUILD_NUMBER" 
+            }
+        } 
     }
 }
