@@ -5,7 +5,7 @@
 4. Carefully add brance main or master ?
 5. A POM must needed in parallal to git repository url like https://github.com/MdAslamHossain/Kubernates or outside POM and declare main class
 
- 
+ 6.https://www.jenkins.io/download/
 
 
 
